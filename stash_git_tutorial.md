@@ -1,10 +1,10 @@
 # Introduction
-StaSH comes with a few tools for working with git repos.  This tutorial will cover a few basic workflows for deal with git repositories in atash/Pythonista specifically.  It helps to be familiar with git commandline tools, although the git in stash is missing a great many features that you might be used to.
+StaSh comes with a few tools for working with git repos. This tutorial will cover a few basic workflows for dealing with git repositories in stash/Pythonista specifically. It helps to be familiar with git commandline tools, although the git in stash is missing a great many features that you might be used to.
 
 ## Creating a repo from scratch
 You have a new idea for a project.  Maybe you have some cool code you'd like to share.  Fire up stash, and let's begin.
 
-There are a few basic options when creating new work.  First is to create a local git repo, and work locally.  When you are ready to publish, you would create a bare github repo, then push to it.  Second is to create the github repo first, clone it back locally, and then start adding files.  The first method takes a few extra steps, but is more appropriate when you already have files created.
+There are a few basic options when creating a new work.  First is to create a local git repo, and work locally.  When you are ready to publish, you would create a bare github repo, then push to it.  Second is to create the github repo first, clone it back locally, and then start adding files.  The first method takes a few extra steps, but is more appropriate when you already have files created.
 
 Let's start by creating the github repo, using the `gh create` command.  First let's review the help:
 
@@ -36,7 +36,7 @@ Now, magically, a github repo named stash_git_tutorial has been created.  Since 
 Let's pull this locally so we can start working.
 
 ## Cloning a repo
-We have a repo, let's clone it.  A few gotchas to watch out for: the url should be of the form either an ssh:/git@github.com/owner/repo.git, or https://github.com/owner/repo.git.  A later chapter will discuss how to setup ssh (I totally reccommend it, since the http implementation in dulwich seems to not always play well with github.). Don't forget the .git extension!
+We have a repo, let's clone it.  A few gotchas to watch out for: the url should be of the form either an ssh:/git@github.com/owner/repo.git, or https://github.com/owner/repo.git.  A later chapter will discuss how to setup ssh (I totally reccommend it, since the http implementation in dulwich seems to not always play well with github.). Don't forget the **.git** extension!
 Also, don't forget the second argument to clone, which is the folder to clone to.  Leaving it blank will try to clone to the current folder, which is fine if you have alreeady created and cd'd to a folder, but only causes problems if run from ~/Documents.
 
 ```bash 
@@ -47,17 +47,16 @@ Also, don't forget the second argument to clone, which is the folder to clone to
 README.md (46.0B) 2016-02-25 00:47:43
 ``` 
 
-So now we have a copy of the repo on our local device.  The .git folder is special, do not delete it.  A future installment will talk a little about what is in here, since it can sometimes be useful to know a little about the plumbing for times when things go horribly wrong (as long as you don't delete this folder, even if you make a terible mistake, your committed files are safe and can be recovered.  dulwich never really does garbage collection, so objects in the repo will always be there. )
+So now we have a copy of the repo on our local device.  The .git folder is special, do not delete it.  A future installment will talk a little about what is in here, since it can sometimes be useful to know a little about the plumbing for times when things go horribly wrong (as long as you don't delete this folder, even if you make a terrible mistake, your committed files are safe and can be recovered.  dulwich never really does garbage collection, so objects in the repo will always be there. )
 
 ## Adding some files, and our first commit
 Let's go ahead and create some files.  I will go ahead and save this file to that folder.
 
 ``` 
-git_tutorial]$ ll
+[git_tutorial]$ ll
 .git (374.0B) 2016-02-25 00:47:43
 README.md (46.0B) 2016-02-25 00:47:43
 stash_git_tutorial.md (3.5K) 2016-02-25 01:00:58
-[git_tutorial
 ``` 
 The `git add` command is used to add a file to the "index".  There are some good docs describing how git works, but the basic idea is this:  you have a working copy of a folder structure -- basically the files that you see and can edit.  Internal to git, there is another "folder" called the index, or staging area, where you can copy files to create a commit.  The index is a temporary staging area, starts off containing whatever was in the last commit.    When you commit, you create a permanent snapshot of what is in the index at that time.   This act of copying to the staging area in git parlance is called `git add`, and `git commit` creates the snapshot which is then permanently stored.   `git status` checks the index to see if it is up to date with the working copy.  Let us add, then commit, and check status to verify we have added the file.
 
@@ -114,7 +113,7 @@ UNSTAGED LOCAL MODS
 
 Note that since I have been continuing to update this file as I write, the first git status shows me that I have uncommitted changes -- these are not stored anywhere yet, other than your working copy.  I used git add with wildcards.  After, status shows the new files, as well as the fact that this file is modified in the staging area, compared to the last commit.
 
-Sometimes it is useful to use `git diff` to remind yourself of the changes you have made.  The gitview program has a visual diff display which is somewhat easier to look at.
+Sometimes it is useful to use `git diff` to remind yourself of the changes you have made.  The [gitview](https://github.com/jsbain/gitview) program has a visual diff display which is somewhat easier to look at.
 
 ``` 
 [git_tutorial]$ git diff
