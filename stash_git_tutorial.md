@@ -58,8 +58,28 @@ README.md (46.0B) 2016-02-25 00:47:43
 stash_git_tutorial.md (3.5K) 2016-02-25 01:00:58
 [git_tutorial
 ``` 
+The `git add` command is used to add a file to the "index".  There are some good docs describing how git works, but the basic idea is this:  you have a working copy of a folder structure -- basically the files that you see and can edit.  Internal to git, there is another "folder" called the index, or staging area, where you can copy files to create a commit.  The index is a temporary staging area.  When you commit, you create a permanent snapshot of what is in the index at that time.   This act of copying in git parlance is called `git add`, and `git commit` creates the snapshot.  `git status` checks the index to see if it is up to date with the working copy.  Let us add, then commit, and check status to verify we have added the file.
 
+``` 
+[git_tutorial]$ git add stash_git_tutorial.md 
+Adding stash_git_tutorial.md
+[git_tutorial]$ git status
+STAGED
+add['stash_git_tutorial.md']
+UNSTAGED LOCAL MODS
+[]
+[git_tutorial]$ git commit
+Commit Message: Initial commit of tutorial
+Author Name: JonB
+Save this setting? [y/n]y
+Author Email: jsbain@[.....]
+Save this setting? [y/n]y
+e2a369919bc887bb79690420b5765d0ac525dd4d
+``` 
 
+The first time you commit to a repo in stash, it will prompt you to save author name and email so future commits need only the message.  The commit message describes in a few words what the purpose of the commit is.
+
+Let's add a few more files
 
 #TODO
 Future topics:
