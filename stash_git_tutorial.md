@@ -79,8 +79,90 @@ e2a369919bc887bb79690420b5765d0ac525dd4d
 
 The first time you commit to a repo in stash, it will prompt you to save author name and email so future commits need only the message.  The commit message describes in a few words what the purpose of the commit is.
 
-Let's add a few more files
+Let's add a few more files to the folder.  checking status shows the committed file has some unstaged modifications -- meaning i have been editing the file but the changes have not stored in the repo yet.  Using `git add` using a wildcard lets me add the new files as well as any modified ones.  `git diff` shows you what has changed relative to the commit so you know whether you have the right changes in.   A last git status check shows we have staged the changes in the index, and are ready to commit.
 
+``` 
+[git_tutorial]$ echo 'sample file A' > samplea.txt
+[git_tutorial]$ echo 'sample file B' > sampleb.txt
+[git_tutorial]$ git status
+STAGED
+UNSTAGED LOCAL MODS
+['stash_git_tutorial.md']
+[git_tutorial]$ git add *
+Adding README.md
+Adding samplea.txt
+Adding sampleb.txt
+Adding stash_git_tutorial.md
+[git_tutorial]$ git status
+STAGED
+add['sampleb.txt', 'samplea.txt']
+modify['stash_git_tutorial.md']
+UNSTAGED LOCAL MODS
+[]
+[git_tutorial]$ git diff
+diff --git /dev/null b/samplea.txt
+new mode 100644
+index 0000000..e8d2873 100644
+--- /dev/null
++++ b/samplea.txt
+@@ -1,0 +1,1 @@
++sample file A
+diff --git /dev/null b/sampleb.txt
+new mode 100644
+index 0000000..80ad0f9 100644
+--- /dev/null
++++ b/sampleb.txt
+@@ -1,0 +1,1 @@
++sample file B
+diff --git a/stash_git_tutorial.md b/stash_git_tutorial.md
+index fc18f02..b982ec5 100644
+--- a/stash_git_tutorial.md
++++ b/stash_git_tutorial.md
+@@ -58,8 +58,28 @@
++The `git add` command is used to add a file to the "index" [...]
++``` 
++[git_tutorial]$ git add stash_git_tutorial.md 
++Adding stash_git_tutorial.md
++[git_tutorial]$ git status
++STAGED
++add['stash_git_tutorial.md']
++UNSTAGED LOCAL MODS
++[]
++[git_tutorial]$ git commit
++Commit Message: Initial commit of tutorial
++Author Name: JonB
++Save this setting? [y/n]y
++Author Email: jsbain@[.....]
++Save this setting? [y/n]y
++e2a369919bc887bb79690420b5765d0ac525dd4d
++``` 
+ 
++The first time you commit to a repo in stash, it will prompt you to save author name and email so future commits need only the message.  The commit message describes in a few words what the purpose of the commit is.
++
++Let's add a few more files
+ 
+ #TODO
+ Future topics:
+[git_tutorial]$ git status
+STAGED
+add['sampleb.txt', 'samplea.txt']
+modify['stash_git_tutorial.md']
+UNSTAGED LOCAL MODS
+[]
+[git_tutorial]$ git commit "Added some files and caught up with tutorial"
+8509bbf0116a29076099e3db5c0ba3e57b1d43d9
+``` 
+
+The 20 digit character you see when committing is the sha, or hash, that uniquely identifies the committed tree, along with the date,time,author info.  
+
+Finally, we want the world to see the great progress we are making.  Time to push back to github.
+
+``` 
+[git_tutorial]$ git push
+Attempting to push to: https://github.com/jsbain/stash_git_tutorial.git, branch: refs/heads/master
+Push to https://jsbain:********@github.com/jsbain/stash_git_tutorial.git successful.
+success!
+``` 
 #TODO
 Future topics:
 1) creating bare repos and pushing to gh
